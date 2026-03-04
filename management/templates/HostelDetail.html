@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ hostel.name }}</title>
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <h1>{{ hostel.name }}</h1>
+        <nav>
+            <a href="{% url 'hostels' %}">Back to Hostels</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    {% if messages %}
+        {% for message in messages %}
+            <p class="alert">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <p>Location: {{ hostel.location }}</p>
+    {% if hostel.hostel_owner %}
+        <p>Owner: {{ hostel.hostel_owner.name }}</p>
+    {% endif %}
+    <p>Status: <strong>{% if hostel.is_available %}Available{% else %}Booked{% endif %}</strong></p>
+
+    {% if existing_booking %}
+        <h3>This room has been booked</h3>
+        {% if can_view_booking_identity %}
+            <p>Booked by: {{ existing_booking.name.name }}</p>
+        {% endif %}
+        <p>Booking date: {{ existing_booking.booking_date }}</p>
+        <p>Duration: {{ existing_booking.duration }}</p>
+        <p>Booking status: {{ existing_booking.get_status_display }}</p>
+    {% else %}
+        <h3>Book this room</h3>
+        {% if user.is_authenticated %}
+            {% if student_booking %}
+                <p class="alert">You already booked "{{ student_booking.room.name }}". A student can only book one room.</p>
+            {% else %}
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="book">
+                <label>Duration (months): <input type="text" name="duration" required></label><br>
+                <button type="submit">Book Now</button>
+            </form>
+            {% endif %}
+        {% else %}
+            <p>Please <a href="{% url 'login' %}">login</a> as a student to make a booking.</p>
+        {% endif %}
+    {% endif %}
+
+    {% if student_booking and student_booking.room_id == hostel.id %}
+        <h3>Submit Payment</h3>
+        {% if payment %}
+            <div class="booking-status">
+                <p>Payment amount: {{ payment.amount }}</p>
+                <p>Transaction code: {{ payment.transaction_code }}</p>
+                <p>Paid phone: {{ payment.paid_by_phone }}</p>
+                <p>Payment status: {{ payment.get_status_display }}</p>
+            </div>
+        {% else %}
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="pay">
+                <label>Amount: <input type="number" step="0.01" min="1" name="amount" required></label>
+                <label>Transaction Code: <input type="text" name="transaction_code" required></label>
+                <label>Phone Used for Payment: <input type="text" name="paid_by_phone" required></label>
+                <button type="submit">Submit Payment</button>
+            </form>
+        {% endif %}
+    {% endif %}
+</main>
+</body>
+</html>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', Arial, sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    header {
+        background: white;
+        padding: 20px 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 40px;
+        border-radius: 8px;
+    }
+
+    .header-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header h1 {
+        font-size: 28px;
+        color: #2c3e50;
+        font-weight: 700;
+    }
+
+    nav a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        border: 2px solid #667eea;
+    }
+
+    nav a:hover {
+        background: #667eea;
+        color: white;
+    }
+
+    main {
+        width: 90%;
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    main h3 {
+        color: #2c3e50;
+        font-size: 22px;
+        margin-bottom: 20px;
+        border-bottom: 3px solid #667eea;
+        padding-bottom: 10px;
+    }
+
+    main p {
+        color: #555;
+        margin-bottom: 15px;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        color: #2c3e50;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    input {
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        font-family: 'Poppins', Arial, sans-serif;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+    }
+
+    button {
+        padding: 14px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .booking-status {
+        background: #e8f4f8;
+        border-left: 5px solid #667eea;
+        padding: 20px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
+
+    .booking-status p {
+        margin: 10px 0;
+    }
+
+    .alert {
+        background: #fef3c7;
+        border-left: 4px solid #f59e0b;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+    }
+</style>

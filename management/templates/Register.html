@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+</head>
+<body>
+<div class="register-box">
+    <h2>Create an Account</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="full_name" placeholder="Full Name" required>
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <label class="role-label">Register as:
+            <select name="role" required>
+                <option value="student">Student</option>
+                <option value="owner">Hostel Owner</option>
+            </select>
+        </label>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+        <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account?
+        <a href="{% url 'login' %}">Login here</a>
+    </p>
+</div>
+</body>
+</html>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: #1f2937;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("{% static 'kk.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+    z-index: -2;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.35), rgba(30, 41, 59, 0.25));
+    z-index: -1;
+}
+
+.register-box {
+    background: rgba(255, 255, 255, 0.96);
+    width: min(92vw, 400px);
+    padding: 36px 30px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    opacity: ;
+}
+
+.register-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1f2937;
+}
+
+.register-box input,
+.register-box select {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.register-box input:focus,
+.register-box select:focus {
+    outline: none;
+    border-color: #0ea5e9;
+}
+
+.role-label {
+    display: block;
+    margin-bottom: 14px;
+    color: #334155;
+    font-size: 14px;
+}
+
+.register-box button {
+    width: 100%;
+    padding: 12px;
+    background: #0284c7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.register-box button:hover {
+    background: #0369a1;
+}
+
+.register-box p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.register-box a {
+    color: #0369a1;
+    text-decoration: none;
+}
+
+.register-box a:hover {
+    text-decoration: underline;
+}
+
+.alert {
+    font-size: 13px;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 6px;
+    background: #fef3c7;
+    color: #92400e;
+}
+</style>

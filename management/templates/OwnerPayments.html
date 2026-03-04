@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Owner Payments</title>
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <h1>{{ owner.name }} Payments</h1>
+        <nav>
+            <a href="{% url 'hostels' %}">Back to Hostels</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <h2>Submitted Payments</h2>
+    {% if owner_payments %}
+        <table>
+            <tr>
+                <th>Room</th>
+                <th>Student</th>
+                <th>Amount</th>
+                <th>Transaction Code</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+            {% for payment in owner_payments %}
+            <tr>
+                <td>{{ payment.booking.room.name }}</td>
+                <td>{{ payment.booking.name.name }}</td>
+                <td>{{ payment.amount }}</td>
+                <td>{{ payment.transaction_code }}</td>
+                <td>{{ payment.paid_by_phone }}</td>
+                <td>{{ payment.get_status_display }}</td>
+                <td>{{ payment.submitted_at }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="empty">No payments submitted yet.</p>
+    {% endif %}
+</main>
+</body>
+</html>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+header {
+    background: white;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.header-container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #0f172a;
+    border: 1px solid #64748b;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+main {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+h2 {
+    margin-bottom: 14px;
+    color: #0f172a;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border-bottom: 1px solid #e2e8f0;
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    color: #334155;
+}
+
+.empty {
+    color: #64748b;
+}
+</style>

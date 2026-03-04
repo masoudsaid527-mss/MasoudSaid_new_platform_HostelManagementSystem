@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hostel Management System</title>
+
+
+</head>
+
+<body>
+
+<header>
+    <div class="header-container">
+        <h1>Hostel Management System</h1>
+        <nav>
+            <a href="{% url 'about' %}">About Us</a>
+            <a href="{% url 'contact' %}">Contact Us</a>
+            {% if user.is_authenticated %}
+                <span class="user-info">Welcome, {{ user.first_name }}!</span>
+                <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+            {% endif %}
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <h2>Manage Your Hostel Easily</h2>
+    <p>
+        Hostel Management System for students to manage their hostel easily, 
+        Students can manage their hostel from here.
+    </p>
+
+
+
+    <a href="{% url 'hostels' %}" class="btn">Get Started</a>
+
+
+
+</section>
+
+<section class="features">
+    <div class="feature">
+        <h3>Student Management</h3>
+        <p>Add, Remove, Edit Students.</p>
+    </div>
+    <div class="feature">
+        <h3>Room Allocation</h3>
+        <p>Allocate Rooms to Students.</p>
+    </div>
+    <div class="feature">
+        <h3>Payment Tracking</h3>
+        <p>Track Payments for Students.</p>
+    </div>
+</section>
+
+<section class="about">
+    <h2>About the System</h2>
+    <p>
+        Hostel Management System is a web application that allows students to manage their hostel easily. 
+        It provides features such as student management, room allocation, and payment tracking.
+    </p>
+</section>
+
+<footer>
+    <p>&copy; 2026 Hostel Management System</p>
+</footer>
+
+</body>
+</html>
+
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+body{
+    background-image: url(kk.jpg);
+}
+
+/* HEADER */
+header{
+    background:#2c3e50;
+    color:white;
+    padding:20px 0;
+}
+
+.header-container{
+    width:90%;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h1{
+    font-size:24px;
+}
+
+/* NAVIGATION */
+nav a{
+    color:white;
+    margin-left:15px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+nav a:hover{
+    text-decoration:underline;
+}
+
+.user-info{
+    color:white;
+    margin-left:15px;
+    font-weight:bold;
+}
+
+.logout-btn{
+    background:#e74c3c;
+    padding:8px 15px;
+    border-radius:5px;
+    display:inline-block;
+}
+
+.logout-btn:hover{
+    background:#c0392b;
+    text-decoration:none;
+}
+
+/* HERO SECTION */
+.hero{
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+               url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2');
+    background-size:cover;
+    background-position:center;
+    color:white;
+    padding:100px 20px;
+    text-align:center;
+}
+
+.hero h2{
+    font-size:36px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:18px;
+    margin-bottom:25px;
+}
+
+.hero a{
+    background:#3498db;
+    color:white;
+    padding:12px 25px;
+    text-decoration:none;
+    border-radius:5px;
+    font-size:16px;
+}
+
+.hero a:hover{
+    background:#217dbb;
+}
+
+/* FEATURES */
+.features{
+    width:90%;
+    margin:60px auto;
+    display:flex;
+    gap:20px;
+}
+
+.feature{
+    background:green;
+    flex:1;
+    padding:30px;
+    text-align:center;
+    border-radius:8px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.feature h3{
+    margin-bottom:10px;
+    color:#2c3e50;
+}
+
+/* ABOUT */
+.about{
+    background:white;
+    padding:60px 10%;
+    text-align:center;
+}
+
+.about h2{
+    margin-bottom:20px;
+    color:#2c3e50;
+}
+
+/* FOOTER */
+footer{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:15px;
+    margin-top:40px;
+}
+</style>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Owner Dashboard</title>
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <h1>{{ owner.name }} Dashboard</h1>
+        <nav>
+            <a href="{% url 'hostels' %}">Back to Hostels</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section>
+        <h2>Bookings for Your Rooms</h2>
+        {% if owner_bookings %}
+            <table>
+                <tr>
+                    <th>Room</th>
+                    <th>Student</th>
+                    <th>Duration</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+                {% for booking in owner_bookings %}
+                    <tr>
+                        <td>{{ booking.room.name }}</td>
+                        <td>{{ booking.name.name }}</td>
+                        <td>{{ booking.duration }}</td>
+                        <td>{{ booking.get_status_display }}</td>
+                        <td>{{ booking.booking_date }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No bookings yet.</p>
+        {% endif %}
+    </section>
+
+    <section>
+        <h2>Submitted Payments</h2>
+        {% if owner_payments %}
+            <table>
+                <tr>
+                    <th>Room</th>
+                    <th>Student</th>
+                    <th>Amount</th>
+                    <th>Transaction</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Submitted</th>
+                </tr>
+                {% for payment in owner_payments %}
+                    <tr>
+                        <td>{{ payment.booking.room.name }}</td>
+                        <td>{{ payment.booking.name.name }}</td>
+                        <td>{{ payment.amount }}</td>
+                        <td>{{ payment.transaction_code }}</td>
+                        <td>{{ payment.paid_by_phone }}</td>
+                        <td>{{ payment.get_status_display }}</td>
+                        <td>{{ payment.submitted_at }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No payments submitted yet.</p>
+        {% endif %}
+    </section>
+</main>
+</body>
+</html>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f1f5f9;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+header {
+    background: #0f172a;
+    color: white;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 20px;
+}
+
+.header-container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    border: 1px solid #94a3b8;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+main {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 20px;
+}
+
+section {
+    background: white;
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    overflow-x: auto;
+}
+
+h2 {
+    color: #0f172a;
+    margin-bottom: 12px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+    padding: 10px;
+    font-size: 14px;
+}
+
+th {
+    color: #334155;
+}
+</style>
