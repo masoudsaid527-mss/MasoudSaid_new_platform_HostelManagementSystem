@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Owner Payments</title>
 </head>
 <body>
@@ -57,6 +58,7 @@
 body {
     background: linear-gradient(135deg, #1e293b, #334155);
     min-height: 100vh;
+    min-height: 100dvh;
     padding: 20px;
 }
 
@@ -101,6 +103,7 @@ h2 {
 
 table {
     width: 100%;
+    min-width: 680px;
     border-collapse: collapse;
 }
 
@@ -117,5 +120,47 @@ th {
 
 .empty {
     color: #64748b;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 12px;
+    }
+
+    header,
+    main {
+        border-radius: 12px;
+    }
+
+    .header-container {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    nav a {
+        display: inline-block;
+        padding: 9px 12px;
+    }
+
+    main {
+        width: 100%;
+        padding: 14px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    th,
+    td {
+        padding: 9px;
+        font-size: 13px;
+    }
 }
 </style>
