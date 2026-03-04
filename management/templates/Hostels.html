@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hostels</title>
 </head>
 <body>
@@ -68,6 +69,7 @@
     body {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
+        min-height: 100dvh;
         padding: 20px;
     }
 
@@ -227,5 +229,57 @@
         color: #92400e;
         padding: 12px;
         border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+        body {
+            padding: 12px;
+        }
+
+        header {
+            margin-bottom: 20px;
+            padding: 14px 0;
+        }
+
+        .header-container,
+        main,
+        .flash-msg {
+            width: 100%;
+        }
+
+        .header-container {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        nav {
+            gap: 8px;
+        }
+
+        nav a,
+        .logout-btn,
+        .owner-btn {
+            padding: 8px 10px !important;
+            font-size: 14px;
+        }
+
+        main h2 {
+            font-size: 26px;
+            margin-bottom: 18px;
+        }
+
+        ul {
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+
+        li {
+            padding: 16px;
+        }
     }
 </style>

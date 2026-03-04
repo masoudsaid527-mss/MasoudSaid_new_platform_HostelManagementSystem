@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Post a Room</title>
 </head>
 <body>
@@ -35,6 +36,7 @@
     body {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
+        min-height: 100dvh;
         padding: 20px;
         display: flex;
         flex-direction: column;
@@ -148,5 +150,36 @@
 
     button:active {
         transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+        body {
+            padding: 12px;
+        }
+
+        header {
+            padding: 14px 0;
+            margin-bottom: 18px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        nav a {
+            padding: 9px 12px;
+        }
+
+        main {
+            width: 100%;
+            padding: 18px 14px;
+        }
+
+        input,
+        button {
+            min-height: 46px;
+            font-size: 16px;
+        }
     }
 </style>

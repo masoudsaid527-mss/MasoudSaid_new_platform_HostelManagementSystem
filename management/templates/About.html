@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us | Hostel Management System</title>
 
 
@@ -82,6 +83,8 @@
 
 body{
     background:#f4f6f9;
+    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 /* HEADER */
@@ -191,5 +194,43 @@ footer{
     text-align:center;
     padding:15px;
     margin-top:40px;
+}
+
+@media (max-width: 768px){
+    .header-container{
+        width:100%;
+        padding:0 12px;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    nav{
+        display:flex;
+        flex-wrap:wrap;
+        gap:8px;
+    }
+
+    nav a{
+        margin-left:0;
+    }
+
+    .page-title{
+        padding:36px 14px;
+    }
+
+    .page-title h2{
+        font-size:28px;
+    }
+
+    .content{
+        width:94%;
+        margin:20px auto;
+        padding:20px 14px;
+    }
+
+    .values{
+        flex-direction:column;
+    }
 }
 </style>

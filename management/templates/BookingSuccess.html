@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Booking Successful</title>
 </head>
 <body>
@@ -39,6 +40,7 @@
     body {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
+        min-height: 100dvh;
         padding: 20px;
         display: flex;
         flex-direction: column;
@@ -133,5 +135,39 @@
         font-weight: 700;
         transition: all 0.3s ease;
         margin: 8px;
+    }
+
+    @media (max-width: 768px) {
+        body {
+            padding: 12px;
+        }
+
+        header {
+            margin-bottom: 18px;
+            padding: 14px 0;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        main {
+            width: 100%;
+        }
+
+        .success-card {
+            padding: 24px 14px;
+        }
+
+        .success-card h2 {
+            font-size: 22px;
+        }
+
+        .btn-back {
+            display: block;
+            width: 100%;
+            margin: 8px 0;
+            text-align: center;
+        }
     }
 </style>
